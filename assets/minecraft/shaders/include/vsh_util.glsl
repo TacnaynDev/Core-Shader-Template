@@ -77,8 +77,8 @@ float getRenderDistance(mat4 ProjMat) {
  * Creates matrix by extracting values from projection matrix
  */
 mat4 getOrthoMat(mat4 ProjMat, float Zoom) {
-    float far = LOWER_BLOCK_CLIPPING_PLANE;
-    float near = -UPPER_BLOCK_CLIPPING_PLANE;
+    float far = getFarClippingPlane(ProjMat);
+    float near = -1000.0; // Avoid clipping distance
     
     float fixed_near = 0.05; // Fixed distance that should never change
     float left = -(0.5 / (ProjMat[0][0] / (2.0 * fixed_near))) / Zoom;
