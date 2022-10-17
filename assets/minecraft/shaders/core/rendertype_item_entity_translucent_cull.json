@@ -4,7 +4,7 @@
         "srcrgb": "srcalpha",
         "dstrgb": "1-srcalpha"
     },
-    "vertex": "main/rendertype_entity_lightmap_colored",
+    "vertex": "main/rendertype_item",
     "fragment": "rendertype_item_entity_translucent_cull",
     "attributes": [
         "Position",
