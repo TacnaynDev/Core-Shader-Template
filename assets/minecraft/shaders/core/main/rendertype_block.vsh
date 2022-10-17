@@ -33,7 +33,7 @@ void main() {
         #moj_import <entity_shader.glsl>
 
         // Populate outputs
-        vertexDistance = length(viewPos);
+        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
         vertexColor = outputColor * minecraft_sample_lightmap(Sampler2, UV2);
         
     } else {
@@ -41,7 +41,7 @@ void main() {
         #moj_import <block_shader.glsl>
 
         // Populate outputs
-        vertexDistance = length(viewPos);
+        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
         vertexColor = outputColor * minecraft_sample_lightmap(Sampler2, UV2);
 
     }
