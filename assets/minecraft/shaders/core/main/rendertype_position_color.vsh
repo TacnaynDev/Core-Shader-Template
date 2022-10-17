@@ -8,6 +8,7 @@ in vec3 Position;
 in vec4 Color;
 
 uniform mat4 ModelViewMat;
+uniform mat3 IViewRotMat;
 uniform mat4 ProjMat;
 uniform float GameTime;
 
