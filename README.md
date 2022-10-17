@@ -1,15 +1,20 @@
 # Core-shader-template
-Template resource pack for creating general core shaders using only 2 files.
+Have you ever tried writing a core shader? There are over 150 files that have to be edited to make something very simple. There are existing templates, but at best they reduce the workload down to 10 files, and there is still endless copy-pasting.  
+  
+This shader template reduces the workload down to **two** files! There are clear instructions written inside to make learning shaders much easier, and all the edge-cases are handled for you.
+  
 Based on Onnowhere's shader template: [https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP](https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP)
 
 ## How to use
-Go to assets > shaders > include and modify the files entity_shader.glsl & block_shader.glsl.  
-
-Other files may be modified by more advanced users.
-
+1. Go to assets > minecraft > shaders > include  
+2. Edit the files called entity_shader & block_shader  
+  
+Onnowhere's utility functions are included.  
+Other files may be modified by more advanced users.  
+  
 ## Known Issues  
-Transparent moving blocks do not render properly when modified
-
+Transparent moving blocks do not render properly when modified  
+  
 ## TODO  
-Remove unnecessary UV maps from fragment shaders to further optimize template
+Remove unnecessary UV maps from fragment shaders to further optimize template  
 Add support for customizing GUI and text elements more easily
