@@ -8,6 +8,7 @@ Based on Onnowhere's shader template: [https://github.com/onnowhere/core_shaders
 ## How to use
 1. Go to assets > minecraft > shaders > include  
 2. Edit the files called entity_shader & block_shader  
+3. Profit.  
   
 Onnowhere's utility functions are included.  
 Other files may be modified by more advanced users.  
