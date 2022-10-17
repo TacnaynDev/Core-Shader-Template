@@ -3,7 +3,7 @@ Have you ever tried writing a core shader? There are over 150 files that have to
   
 This shader template reduces the workload down to **two** files! There are clear instructions written inside to make learning shaders much easier, and all the edge-cases are handled for you.
   
-Based on Onnowhere's shader template: [https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP](https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP)
+Based on Onnowhere's shader template: https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP  
 
 ## How to use
 1. Go to assets > minecraft > shaders > include  
@@ -14,7 +14,7 @@ Onnowhere's utility functions are included.
 Other files may be modified by more advanced users. 
 
 ## Learn More  
-https://github.com/McTsts/Minecraft-Shaders-Wiki
+https://github.com/McTsts/Minecraft-Shaders-Wiki  
   
 ## Known Issues  
 Transparent moving blocks do not render properly when modified  
