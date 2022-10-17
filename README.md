@@ -11,4 +11,5 @@ Other files may be modified by more advanced users.
 Transparent moving blocks do not render properly when modified
 
 ## TODO  
+Remove unnecessary UV maps from fragment shaders to further optimize template
 Add support for customizing GUI and text elements more easily

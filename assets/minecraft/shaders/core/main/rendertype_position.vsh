@@ -1,6 +1,7 @@
 #version 150
 
 #moj_import <vsh_util.glsl>
+#moj_import <fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -10,6 +11,7 @@ in vec3 Normal;
 
 uniform mat3 IViewRotMat;
 uniform mat4 ModelViewMat;
+uniform int FogShape;
 uniform mat4 ProjMat;
 
 out float vertexDistance;
@@ -23,16 +25,16 @@ void main() {
     vec3 pos = Position;
 
     // Skip GUI
-    if (!isGUI(ProjMat)) {
-        
+    if (isGUI(ProjMat)) {
+        gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+        vertexDistance = fog_distance(ModelViewMat, IViewRotMat * Position, FogShape);
+        vertexColor = Color;
+
+    } else {
         #moj_import <block_shader.glsl>
 
-        vertexDistance = length(viewPos);
+        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
         vertexColor = outputColor;
-    } else {
-        gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-        vertexDistance = length((ModelViewMat * vec4(Position, 1.0)).xyz);
-        vertexColor = Color;
     }
     
     texCoord0 = UV0;

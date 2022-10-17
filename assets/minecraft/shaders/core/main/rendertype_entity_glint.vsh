@@ -1,6 +1,7 @@
 #version 150
 
 #moj_import <vsh_util.glsl>
+#moj_import <fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -11,6 +12,7 @@ uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform float GameTime;
 uniform mat4 TextureMat;
+uniform int FogShape;
 
 out float vertexDistance;
 out vec4 vertexColor;
@@ -20,14 +22,14 @@ void main() {
     
     if(isGUI(ProjMat)){
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-        vertexDistance = length((ModelViewMat * vec4(Position, 1.0)).xyz);
+        vertexDistance = fog_distance(ModelViewMat, IViewRotMat * Position, FogShape);
 
     } else {
         
         #moj_import <entity_shader.glsl>
 
         // Populate outpus
-        vertexDistance = length(viewPos);
+        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
     }
 
     vertexColor = Color;

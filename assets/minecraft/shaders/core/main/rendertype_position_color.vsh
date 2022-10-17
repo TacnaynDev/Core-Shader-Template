@@ -20,7 +20,7 @@ void main() {
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
     } else {
         // gl_Position = vec4(0); // Disable lower part of skybox
-        gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+        #moj_import <entity_shader.glsl>
     }
 
     vertexColor = Color;

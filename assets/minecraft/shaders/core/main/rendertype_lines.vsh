@@ -1,6 +1,7 @@
 #version 150
 
 #moj_import <vsh_util.glsl>
+#moj_import <fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -11,6 +12,7 @@ uniform mat4 ProjMat;
 uniform float LineWidth;
 uniform vec2 ScreenSize;
 uniform mat3 IViewRotMat;
+uniform int FogShape;
 uniform float GameTime;
 
 out float vertexDistance;
@@ -28,7 +30,7 @@ void main() {
 
     #moj_import <entity_shader.glsl>
 
-    vertexDistance = length(viewPos);
+    fog_distance(ModelViewMat, viewPos, FogShape);
 
     // Vanilla code
     vec4 linePosStart = OutputProjMat * VIEW_SCALE * vec4(viewPos, 1.0);
