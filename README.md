@@ -5,6 +5,12 @@ This shader template reduces the workload down to **two** files! There are clear
   
 Based on Onnowhere's shader template: https://github.com/onnowhere/core_shaders/tree/master/CoreShadersCustomTemplateRP  
 
+## How powerful is this?  
+Using this template, you can create shaders like this with ease:  
+  
+![Animal Crossing Shader](https://cdn.discordapp.com/attachments/979925547968770088/1031748803914649661/javaw_00mWLMlCFd.png)  
+This was created by modifying only **four** lines!
+
 ## How to use
 1. Go to assets > minecraft > shaders > include  
 2. Edit the files called entity_shader & block_shader  
