@@ -9,7 +9,7 @@ Based on Onnowhere's shader template: https://github.com/onnowhere/core_shaders/
 Using this template, you can create shaders like this with ease:  
   
 ![Animal Crossing Shader](https://cdn.discordapp.com/attachments/979925547968770088/1031748803914649661/javaw_00mWLMlCFd.png)  
-This was created by modifying only **four** lines!
+This was created with **one** line in two files!  
 
 ## How to use
 1. Go to assets > minecraft > shaders > include  

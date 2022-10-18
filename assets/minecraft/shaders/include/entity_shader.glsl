@@ -19,6 +19,12 @@ mat4 OutputProjMat;
 
 
 /* --- Put code below here --- */
+vec3 pos = IViewRotMat * Position; // Translate Position to world-space
+
+
+
+
+viewPos = pos * IViewRotMat; // Translate pos back into view-space
 
 // Set outputs
 OutputProjMat = ProjMat;
@@ -26,4 +32,4 @@ viewPos = Position;
 outputColor = Color;
 
 // Project world to screen
-gl_Position = OutputProjMat * ModelViewMat * vec4(viewPos, 1.0);
+gl_Position = OutputProjMat * vec4(viewPos, 1.0);
