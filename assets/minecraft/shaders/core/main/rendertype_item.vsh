@@ -35,6 +35,7 @@ void main() {
     // Populate outputs
     lightMapColor = texelFetch(Sampler2, UV2 / 16, 0);
     texCoord0 = UV0;
+    overlayColor = texelFetch(Sampler1, UV1, 0);
 
     if(isGUI(ProjMat)){
         
@@ -61,7 +62,6 @@ void main() {
 
         // Populate outputs
         vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
-        overlayColor = texelFetch(Sampler1, UV1, 0);
         vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, outputColor);
 
     }
