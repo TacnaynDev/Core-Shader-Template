@@ -7,6 +7,7 @@
 in vec3 Position;
 in vec4 Color;
 in vec2 UV0;
+in ivec2 UV1;
 in ivec2 UV2;
 in vec3 Normal;
 
@@ -25,6 +26,7 @@ uniform vec3 Light1_Direction;
 out float vertexDistance;
 out vec4 vertexColor;
 out vec4 lightMapColor;
+out vec4 overlayColor;
 out vec2 texCoord0;
 out vec4 normal;
 
@@ -59,6 +61,7 @@ void main() {
 
         // Populate outputs
         vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
+        overlayColor = texelFetch(Sampler1, UV1, 0);
         vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, outputColor);
 
     }
