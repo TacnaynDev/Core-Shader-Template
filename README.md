@@ -19,10 +19,10 @@ This was created with **one** line in two files!
 Onnowhere's utility functions are included.  
 Other files may be modified by more advanced users. 
 
-## Learn More  
+## Learn more about shaders  
 https://github.com/McTsts/Minecraft-Shaders-Wiki  
   
-## Known Issues  
+## Known issues  
 Transparent moving blocks do not render properly when modified  
 Dropped items do not render shadows properly during pickup animation (Unfixable due to all shadows being handled as blocks)  
 
