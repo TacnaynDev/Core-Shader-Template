@@ -1,4 +1,4 @@
-// Bottom half of sky and various GUI elements
+// Bottom half of sky, sun & moon, and various GUI elements
 
 #version 150
 
@@ -6,6 +6,7 @@
 
 in vec3 Position;
 in vec4 Color;
+in vec2 UV0;
 
 uniform mat4 ModelViewMat;
 uniform mat3 IViewRotMat;
@@ -13,31 +14,24 @@ uniform mat4 ProjMat;
 uniform float GameTime;
 
 out vec4 vertexColor;
+out vec2 texCoord0;
 
 void main() {
 
-    vertexColor = Color;
+   /* * * * * * * * * * * * * * * * * * * * *
+    *  Edit this file manually if the sky   *
+    *  is acting strange with your shader.  *
+    * * * * * * * * * * * * * * * * * * * * */
 
+    texCoord0 = UV0;
+    vertexColor = Color;
+    
     // Skip GUI
     if (isGUI(ProjMat)) {
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
         return;
     }
-        
-    vec3 pos;
-    vec4 color;
-    mat4 projMat;
-    float fogDistance;
-    
-    if(ModelViewMat == mat4(1)) 
-    {
-        pos = IViewRotMat * Position; // Translate Position to world-space
 
-        #moj_import <entity_shader.glsl>
-    } else {
-                
-        pos = Position; // Add chunk offset
-
-        #moj_import <block_shader.glsl>
-    }
+    // Use default rendering for sky
+    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);    
 }

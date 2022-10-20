@@ -31,16 +31,16 @@ void main() {
     mat4 projMat;
     float fogDistance;
 
-    pos = IViewRotMat * Position; // Translate Position to world-space
-
     #moj_import <entity_shader.glsl>
 
-    vec3 viewPos = pos * IViewRotMat;
     vertexColor = color;
 
+    mat4 IProjMat = inverse(projMat);
+    vec4 viewPos = IProjMat * gl_Position;
+
     // Vanilla code
-    vec4 linePosStart = projMat * VIEW_SCALE * vec4(viewPos, 1.0);
-    vec4 linePosEnd = projMat * VIEW_SCALE * vec4(viewPos + Normal, 1.0);
+    vec4 linePosStart = projMat * VIEW_SCALE * viewPos;
+    vec4 linePosEnd = projMat * VIEW_SCALE * viewPos + vec4(Normal, 1.0);
 
     vec3 ndc1 = linePosStart.xyz / linePosStart.w;
     vec3 ndc2 = linePosEnd.xyz / linePosEnd.w;

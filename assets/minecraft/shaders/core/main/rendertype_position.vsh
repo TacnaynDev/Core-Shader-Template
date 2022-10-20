@@ -32,7 +32,7 @@ void main() {
             length((ModelViewMat * vec4(pos.x, 0.0, pos.z, 1.0)).xyz),
             length((ModelViewMat * vec4(0.0, pos.y, 0.0, 1.0)).xyz));
         vertexColor = Color;
-
+        return;
     }
 
     vec4 color;
@@ -43,5 +43,4 @@ void main() {
 
     vertexDistance = fogDistance;
     vertexColor = color;
-    
 }
