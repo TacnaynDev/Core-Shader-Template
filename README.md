@@ -27,5 +27,8 @@ Transparent moving blocks do not render properly when modified
 Dropped items do not render shadows properly during pickup animation (Unfixable due to all shadows being handled as blocks)  
 
 ## TODO  
+Remove FogShape from all the jsons
+Fix rendertype_lines (some lines are entities and some are blocks)
 Remove unnecessary UV maps from fragment shaders to further optimize template  
-Add support for customizing GUI and text elements more easily
+Add support for customizing GUI and text elements more easily  
+Merge fragment shaders and allow for editing those

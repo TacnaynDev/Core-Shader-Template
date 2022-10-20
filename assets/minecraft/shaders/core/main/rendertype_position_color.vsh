@@ -16,13 +16,20 @@ out vec4 vertexColor;
 
 void main() {
 
+    vertexColor = Color;
+
     // Skip GUI
     if (isGUI(ProjMat)) {
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    } else {
-        // gl_Position = vec4(0); // Disable lower part of skybox
-        #moj_import <entity_shader.glsl>
+        return;
     }
+        
+    vec3 pos = IViewRotMat * Position;
+    vec4 color;
+    mat4 projMat;
+    float fogDistance;
+    
+    // gl_Position = vec4(0); // Disable lower part of skybox
+    #moj_import <entity_shader.glsl>
 
-    vertexColor = Color;
 }

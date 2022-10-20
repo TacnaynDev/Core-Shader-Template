@@ -1,35 +1,40 @@
-/* 
- * Shader template by TacNayn
- */
+// Shader template by TacNayn
 
-// --- Outputs ---
-// These MUST be populated
-vec3 viewPos;
-vec4 outputColor;
-mat4 OutputProjMat;
+//  vvv (For reference only, DO NOT UNCOMMENT) vvv
 
-// --- AVAILABLE VARIABLES ---
-// in vec3 Position;            Position in VIEW space
-// in vec4 Color;               Current vertex color
-
+//      --- UNIFORMS ---          
 // uniform mat3 IViewRotMat;    Turns coordinates from view space > world space
-// uniform mat4 ModelViewMat;   This is an IDENTITY MATRIX for entites. Use inverse by doing transpose(IViewRotMat) instead
-// uniform mat4 ProjMat;        Turns coordinates from view space > screen space
-// uniform float GameTime;
+// uniform mat4 ModelViewMat;   This is an IDENTITY MATRIX for entites. Use transpose(IViewRotMat) instead. (or right-multiplication)
+// uniform mat4 ProjMat;        Projects coordinates from view space > screen space
+// uniform float GameTime;      Increases every frame. Synchronized between players. Will lag with the server
 
+//    --- INPUT VARIABLES --- 
+// vec3 pos;                    Position in world space (relative to camera)
+// vec3 Position;               Position in *VIEW* space
+// vec4 Color;                  Current vertex color (read-only)
+
+//    --- OUTPUT VARIABLES ---      
+// vec3 pos;                    Final position
+// vec4 color;                  Final vertex color
+// mat4 projMat;                The actual projection matrix used
+// float fogDistance;           If this value is above renderdistance * 16, fog will be drawn over the vertex
+
+//  ^^^ (For reference only, DO NOT UNCOMMENT) ^^^ 
+
+// --- Initialize Outputs ---
+color = Color;
+projMat = ProjMat;
 
 /* --- Put code below here --- */
-vec3 pos = IViewRotMat * Position; // Translate Position to world-space
 
 
 
 
-viewPos = pos * IViewRotMat; // Translate pos back into view-space
 
-// Set outputs
-OutputProjMat = ProjMat;
-viewPos = Position;
-outputColor = Color;
+// Draw fog (Cylinder shape)
+fogDistance = max(
+    length((ModelViewMat * vec4(pos.x, 0.0, pos.z, 1.0)).xyz),
+    length((ModelViewMat * vec4(0.0, pos.y, 0.0, 1.0)).xyz));
 
 // Project world to screen
-gl_Position = OutputProjMat * vec4(viewPos, 1.0);
+gl_Position = projMat * (vec4(pos, 1.0) * mat4(IViewRotMat));

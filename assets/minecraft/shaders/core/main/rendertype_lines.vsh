@@ -1,7 +1,6 @@
 #version 150
 
 #moj_import <vsh_util.glsl>
-#moj_import <fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -12,7 +11,6 @@ uniform mat4 ProjMat;
 uniform float LineWidth;
 uniform vec2 ScreenSize;
 uniform mat3 IViewRotMat;
-uniform int FogShape;
 uniform float GameTime;
 
 out float vertexDistance;
@@ -27,14 +25,17 @@ const mat4 VIEW_SCALE = mat4(
 );
 
 void main() {
+    
+    vec3 pos = IViewRotMat * Position; // Translate Position to world-space
+    vec4 color;
+    mat4 projMat;
+    float fogDistance;
 
     #moj_import <entity_shader.glsl>
 
-    fog_distance(ModelViewMat, viewPos, FogShape);
-
     // Vanilla code
-    vec4 linePosStart = OutputProjMat * VIEW_SCALE * vec4(viewPos, 1.0);
-    vec4 linePosEnd = OutputProjMat * VIEW_SCALE * vec4(viewPos.xyz + Normal, 1.0);
+    vec4 linePosStart = projMat * VIEW_SCALE * vec4(pos * IViewRotMat, 1.0);
+    vec4 linePosEnd = projMat * VIEW_SCALE * vec4(pos * IViewRotMat + Normal, 1.0);
 
     vec3 ndc1 = linePosStart.xyz / linePosStart.w;
     vec3 ndc2 = linePosEnd.xyz / linePosEnd.w;
@@ -52,5 +53,5 @@ void main() {
         gl_Position = vec4((ndc1 - vec3(lineOffset, 0.0)) * linePosStart.w, linePosStart.w);
     }
 
-    vertexColor = Color;
+    vertexColor = color;
 }

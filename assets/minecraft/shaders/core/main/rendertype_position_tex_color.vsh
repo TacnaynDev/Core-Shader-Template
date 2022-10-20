@@ -1,5 +1,4 @@
-// End sky, main menu panorama, and menu backgrounds 
-
+// End sky, main menu panorama, and menu backgrounds
 #version 150
 
 #moj_import <vsh_util.glsl>
@@ -18,19 +17,19 @@ out vec4 vertexColor;
 
 void main() {
 
+   /* * * * * * * * * * * * * * * * * * * * * * *
+    *  Edit this file manually if the end sky   *
+    *  is acting strange with your shader.      *
+    * * * * * * * * * * * * * * * * * * * * * * */
+
+    texCoord0 = UV0;
+
     if(isGUI(ProjMat) || isPanorama(ProjMat)){
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
         vertexColor = Color;
+        return;
+    } 
 
-    } else {
-        
-        #moj_import <entity_shader.glsl>
-
-        gl_Position = ProjMat * vec4(viewPos, 1.0);
-
-        vertexColor = outputColor;
-
-    }
-
-    texCoord0 = UV0;
+    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+    vertexColor = Color;
 }

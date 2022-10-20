@@ -15,12 +15,16 @@ out vec4 texProj0;
 
 void main() {
     
-
     if(isGUI(ProjMat)){
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
     } else {
         
+        vec3 pos = IViewRotMat * Position; // Translate Position to world-space
+        vec4 color;
+        mat4 projMat;
+        float fogDistance;
+
         #moj_import <entity_shader.glsl>
 
     }

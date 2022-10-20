@@ -2,7 +2,6 @@
 
 #moj_import <light.glsl>
 #moj_import <vsh_util.glsl>
-#moj_import <fog.glsl>
 
 in vec3 Position;
 in vec4 Color;
@@ -15,7 +14,6 @@ uniform mat3 IViewRotMat;
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform vec3 ChunkOffset;
-uniform int FogShape;
 uniform float GameTime;
 
 out float vertexDistance;
@@ -25,28 +23,28 @@ out vec4 normal;
 
 void main() {
     
-    vec3 pos = Position + ChunkOffset;
-    
+    vec3 pos;
+    vec4 color;
+    mat4 projMat;
+    float fogDistance;
+
     // Check if vertex is a piston or falling block (entity-type)
     if(ModelViewMat == mat4(1)) 
     {
-        
-        #moj_import <entity_shader.glsl>
+        pos = IViewRotMat * Position; // Translate Position to world-space
 
-        // Populate outputs
-        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
-        vertexColor = outputColor * minecraft_sample_lightmap(Sampler2, UV2);
+        #moj_import <entity_shader.glsl>
         
     } else {
         
-        #moj_import <block_shader.glsl>
+        pos = Position + ChunkOffset; // Add chunk offset
 
-        // Populate outputs
-        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
-        vertexColor = outputColor * minecraft_sample_lightmap(Sampler2, UV2);
+        #moj_import <block_shader.glsl>
 
     }
 
     // Populate outputs
     texCoord0 = UV0;
+    vertexDistance = fogDistance;
+    vertexColor = color * minecraft_sample_lightmap(Sampler2, UV2);
 }

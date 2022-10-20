@@ -1,7 +1,6 @@
 #version 150
 
 #moj_import <light.glsl>
-#moj_import <fog.glsl>
 #moj_import <vsh_util.glsl>
 
 in vec3 Position;
@@ -17,7 +16,6 @@ uniform sampler2D Sampler2;
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform mat3 IViewRotMat;
-uniform int FogShape;
 uniform float GameTime;
 
 uniform vec3 Light0_Direction;
@@ -32,23 +30,31 @@ out vec4 normal;
 
 void main() {
 
-    if(isGUI(ProjMat)){
-        
-        gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-        vertexDistance = fog_distance(ModelViewMat, IViewRotMat * Position, FogShape);
-        vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);
-
-    } else {
-
-        #moj_import <entity_shader.glsl>
-
-        // Populate outputs
-        vertexDistance = fog_distance(ModelViewMat, viewPos, FogShape);
-        vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, outputColor);
-    }
-
     // Populate outputs
     lightMapColor = texelFetch(Sampler2, UV2 / 16, 0);
     overlayColor = texelFetch(Sampler1, UV1, 0);
     texCoord0 = UV0;
+
+    vec3 pos = IViewRotMat * Position;
+
+    if(isGUI(ProjMat)){
+        
+        gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+        vertexDistance = max(
+            length((ModelViewMat * vec4(pos.x, 0.0, pos.z, 1.0)).xyz),
+            length((ModelViewMat * vec4(0.0, pos.y, 0.0, 1.0)).xyz));
+        vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);
+        return;
+
+    }
+
+    vec4 color;
+    mat4 projMat;
+    float fogDistance;
+
+    #moj_import <entity_shader.glsl>
+
+    // Populate outputs
+    vertexDistance = fogDistance;
+    vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, color);
 }

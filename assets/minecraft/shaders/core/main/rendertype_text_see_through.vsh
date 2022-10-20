@@ -17,15 +17,21 @@ out vec2 texCoord2;
 
 void main() {
 
-    // Prevent text from rendering
+    texCoord0 = UV0;
+    texCoord2 = UV2;
+
     if (isGUI(ProjMat)) {
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
         vertexColor = Color;
-    } else {
-        #moj_import <entity_shader.glsl>
-        vertexColor = outputColor;
+        return;
     }
 
-    texCoord0 = UV0;
-    texCoord2 = UV2;
+    vec3 pos = IViewRotMat * Position;
+    vec4 color;
+    mat4 projMat;
+    float fogDistance;
+
+    #moj_import <entity_shader.glsl>
+    vertexColor = color;
+
 }
