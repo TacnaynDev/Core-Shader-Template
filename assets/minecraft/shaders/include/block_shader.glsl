@@ -33,7 +33,5 @@ fogDistance = max(
     length((ModelViewMat * vec4(pos.x, 0.0, pos.z, 1.0)).xyz),
     length((ModelViewMat * vec4(0.0, pos.y, 0.0, 1.0)).xyz));
 
-fogDistance *= 8;
-
 // Project world to screen
 gl_Position = ProjMat * ModelViewMat * vec4(pos, 1.0);
