@@ -24,12 +24,20 @@ void main() {
         return;
     }
         
-    vec3 pos = IViewRotMat * Position;
+    vec3 pos;
     vec4 color;
     mat4 projMat;
     float fogDistance;
     
-    // gl_Position = vec4(0); // Disable lower part of skybox
-    #moj_import <entity_shader.glsl>
+    if(ModelViewMat == mat4(1)) 
+    {
+        pos = IViewRotMat * Position; // Translate Position to world-space
 
+        #moj_import <entity_shader.glsl>
+    } else {
+                
+        pos = Position; // Add chunk offset
+
+        #moj_import <block_shader.glsl>
+    }
 }
