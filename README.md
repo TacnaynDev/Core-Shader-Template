@@ -19,7 +19,7 @@ This was created with **one** line in two files!
 Onnowhere's utility functions are included.  
 Other files may be modified by more advanced users. 
 
-## Learn more about shaders  
+## New to shaders? Start here:
 https://github.com/McTsts/Minecraft-Shaders-Wiki  
   
 ## Known issues  
