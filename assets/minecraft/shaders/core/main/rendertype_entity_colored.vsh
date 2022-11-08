@@ -21,6 +21,7 @@ out vec4 normal;
 void main() {
 
     vec3 pos = IViewRotMat * Position; // Translate Position to world-space
+    pos.y += 0.0001;
     vec4 color;
     mat4 projMat;
     float fogDistance;
