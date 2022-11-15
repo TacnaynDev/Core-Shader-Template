@@ -12,6 +12,7 @@ uniform sampler2D Sampler2;
 uniform mat3 IViewRotMat;
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
+uniform float GameTime;
 
 out float vertexDistance;
 out vec4 vertexColor;

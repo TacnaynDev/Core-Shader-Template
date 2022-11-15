@@ -10,6 +10,7 @@ in vec2 UV2;
 uniform mat3 IViewRotMat;
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
+uniform float GameTime;
 
 out vec4 vertexColor;
 out vec2 texCoord0;
