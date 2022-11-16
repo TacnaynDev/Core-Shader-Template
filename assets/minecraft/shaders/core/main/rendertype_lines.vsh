@@ -38,9 +38,10 @@ void main() {
     mat4 IProjMat = inverse(projMat);
     vec4 viewPos = IProjMat * gl_Position;
 
-    // Vanilla code
-    vec4 linePosStart = projMat * VIEW_SCALE * viewPos;
-    vec4 linePosEnd = projMat * VIEW_SCALE * viewPos + vec4(Normal, 1.0);
+
+    bool gui = isGUI(ProjMat);
+    vec4 linePosStart = projMat * VIEW_SCALE * (gui ? ModelViewMat * vec4(Position, 1.0) : viewPos);
+    vec4 linePosEnd = projMat * VIEW_SCALE * (gui ? ModelViewMat * vec4(Position + Normal, 1.0) : viewPos + vec4(Normal, 1.0));
 
     vec3 ndc1 = linePosStart.xyz / linePosStart.w;
     vec3 ndc2 = linePosEnd.xyz / linePosEnd.w;
