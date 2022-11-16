@@ -3,8 +3,6 @@
  * Utility functions for Minecraft core vertex shaders
  */
 
-#moj_import <config.glsl>
-
 #define LIGHT0_DIRECTION vec3(0.2, 1.0, -0.7) // Default light 0 direction everywhere except in inventory
 #define LIGHT1_DIRECTION vec3(-0.2, 1.0, 0.7) // Default light 1 direction everywhere except in nether and inventory
 
